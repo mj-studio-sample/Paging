@@ -7,7 +7,7 @@
         app:constraintSetEnd="@id/end">
         <OnSwipe
             app:dragDirection="dragUp"
-            app:onTouchUp="stop"
+            app:onTouchUp="autoComplete"
             app:touchAnchorId="@id/header"/>
 
     </Transition>
