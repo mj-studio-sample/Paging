@@ -14,8 +14,6 @@ class MainActivity : DaggerAppCompatActivity(), HasDefaultViewModelProviderFacto
         private val TAG = MainActivity::class.java.simpleName
     }
 
-    val age = 23
-
     @Inject
     lateinit var viewModelFactory : ViewModelProvider.Factory
 
