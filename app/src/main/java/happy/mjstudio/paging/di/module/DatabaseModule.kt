@@ -19,7 +19,7 @@ class DatabaseModule {
     @Provides
     @ApplicationScope
     fun provideApplicationDatabase(context : Context) : ApplicationDatabase {
-        return Room.databaseBuilder(context,ApplicationDatabase::class.java,"ApplicationDatabase-1")
+        return Room.databaseBuilder(context,ApplicationDatabase::class.java,"ApplicationDatabase-2")
             .addCallback(object : RoomDatabase.Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     MyApplication.createDatas()

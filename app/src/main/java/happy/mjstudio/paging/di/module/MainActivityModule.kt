@@ -1,8 +1,8 @@
 package happy.mjstudio.paging.di.module
 
 import androidx.lifecycle.ViewModel
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
 import happy.mjstudio.paging.di.scope.ActivityScope
 import happy.mjstudio.paging.ui.MainViewModel
@@ -11,12 +11,10 @@ import happy.mjstudio.paging.ui.MainViewModel
  * Created by mj on 24, November, 2019
  */
 @Module
-class MainActivityModule {
-    @Provides
+abstract class MainActivityModule {
+    @Binds
     @IntoMap
     @ActivityScope
     @ViewModelKey(MainViewModel::class)
-    fun provideMainViewModel() : ViewModel {
-        return MainViewModel()
-    }
+    abstract fun provideMainViewModel(viewModel : MainViewModel) : ViewModel
 }

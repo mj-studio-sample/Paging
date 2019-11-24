@@ -24,11 +24,13 @@ class MyApplication : DaggerApplication() {
         fun createDatas() {
             createDatasJob = GlobalScope.launch {
 
-                val feeds = (1..100).map {
-                    Feed(created = Calendar.getInstance(),title = "Title $it",content = "Content $it",replies = listOf())
-                }.toTypedArray()
+                val dao =  applicationComponent.getApplicationDatabase().feedDao()
 
-                applicationComponent.getApplicationDatabase().feedDao().insertFeed(*feeds)
+                (1..100).map {
+                    val feed = Feed(created = Calendar.getInstance(),title = "Title $it",content = "Content $it",replies = listOf())
+                    dao.insertFeed(feed)
+                }
+
             }
 
         }
