@@ -58,7 +58,7 @@ class MainActivity : DaggerAppCompatActivity(), HasDefaultViewModelProviderFacto
     private fun observeViewModel() {
         mViewModel.apply {
             feedLikeResult.observeOnce(this@MainActivity) {
-                (mBinding.recyclerView.adapter as? FeedAdapter)?.currentList?.dataSource?.invalidate()
+//                (mBinding.recyclerView.adapter as? FeedAdapter)?.currentList?.dataSource?.invalidate()
             }
         }
     }

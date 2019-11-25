@@ -8,8 +8,9 @@ import androidx.paging.Config
 import androidx.paging.LivePagedListBuilder
 import happy.mjstudio.paging.core.Once
 import happy.mjstudio.paging.core.debugE
-import happy.mjstudio.paging.domain.datasource.FeedDataSource
+import happy.mjstudio.paging.domain.datasource.FeedDataSourceFactory
 import happy.mjstudio.paging.domain.entity.Feed
+import happy.mjstudio.paging.domain.repository.FeedRepository
 import happy.mjstudio.paging.domain.usecase.FeedLikeUseCase
 import happy.mjstudio.paging.domain.usecase.FeedListDataSourceFactoryUseCase
 import kotlinx.coroutines.launch
@@ -20,8 +21,8 @@ import javax.inject.Inject
  */
 class MainViewModel @Inject constructor(
     private val feedListDataSourceFactoryUseCase: FeedListDataSourceFactoryUseCase,
-    private val feedDataSourceFactory: FeedDataSource.FeedDataSourceFactory,
-    private val feedLikeUseCase : FeedLikeUseCase
+    private val feedLikeUseCase : FeedLikeUseCase,
+    private val feedRepository: FeedRepository
 ) : ViewModel() {
 
     companion object {
@@ -40,15 +41,15 @@ class MainViewModel @Inject constructor(
     val feedLikeResult : LiveData<Once<Boolean>>
         get() = _feedLikeResult
 
-    val feeds = LivePagedListBuilder(feedListDataSourceFactoryUseCase.execute(Unit),config).build()
-//    val feeds = LivePagedListBuilder(feedDataSourceFactory,config).build()
+//    val feeds = LivePagedListBuilder(feedListDataSourceFactoryUseCase.execute(Unit),config).build()
+    val feeds = LivePagedListBuilder(FeedDataSourceFactory(feedRepository),config).build()
 
     fun onLike(feed : Feed?) {
         feed ?: return
         viewModelScope.launch {
             kotlin.runCatching { feedLikeUseCase.execute(feed.id)}
                 .onSuccess {
-                    _feedLikeResult.value = Once(true)
+                    feeds.value?.dataSource?.invalidate()
                     debugE(TAG,"success")
                 }.onFailure {
                     debugE(TAG,it)

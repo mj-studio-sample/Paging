@@ -1,6 +1,5 @@
 package happy.mjstudio.paging.domain.datasource
 
-import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.PositionalDataSource
 import happy.mjstudio.paging.core.debugE
@@ -9,18 +8,21 @@ import happy.mjstudio.paging.domain.repository.FeedRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by mj on 25, November, 2019
  */
 
-class FeedDataSource @Inject constructor(
+class FeedDataSource constructor(
     private val feedRepository : FeedRepository
 ) : PositionalDataSource<Feed>(), CoroutineScope {
 
     private val TAG = FeedDataSource::class.java.simpleName
+
+    init {
+        debugE(TAG,this)
+    }
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.IO
@@ -45,15 +47,12 @@ class FeedDataSource @Inject constructor(
     }
 
 
-    class FeedDataSourceFactory @Inject constructor(
-        private val dataSource : FeedDataSource
-    ) : DataSource.Factory<Int,Feed>() {
+}
+class FeedDataSourceFactory(
+    private val feedRepository: FeedRepository
+) : DataSource.Factory<Int,Feed>() {
 
-        private val dataSourceLiveData = MutableLiveData<FeedDataSource>()
-
-        override fun create(): DataSource<Int, Feed> {
-            dataSourceLiveData.postValue(dataSource)
-            return dataSource
-        }
+    override fun create(): DataSource<Int, Feed> {
+        return FeedDataSource(feedRepository)
     }
 }
