@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import happy.mjstudio.paging.di.scope.ApplicationScope
 import happy.mjstudio.paging.domain.repository.FeedRepository
+import happy.mjstudio.paging.domain.usecase.FeedLikeUseCase
 import happy.mjstudio.paging.domain.usecase.FeedListDataSourceFactoryUseCase
 import happy.mjstudio.paging.domain.usecase.FeedListUseCase
 
@@ -23,4 +24,8 @@ class UseCaseModule {
     fun feedListDataSourceFactoryUseCase(feedRepository: FeedRepository) : FeedListDataSourceFactoryUseCase {
         return FeedListDataSourceFactoryUseCase(feedRepository)
     }
+
+    @Provides
+    @ApplicationScope
+    fun feedAddLikeUseCase(feedRepository: FeedRepository) = FeedLikeUseCase(feedRepository)
 }

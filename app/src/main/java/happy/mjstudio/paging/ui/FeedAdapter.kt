@@ -13,7 +13,8 @@ import happy.mjstudio.paging.domain.entity.Feed
 /**
  * Created by mj on 25, November, 2019
  */
-class FeedAdapter(private val dateParserUtil: DateParserUtil) : PagedListAdapter<Feed, FeedAdapter.FeedViewHolder>(Feed.DIFF) {
+class FeedAdapter(private val dateParserUtil: DateParserUtil, private val itemClick : (Feed?) -> Unit) : PagedListAdapter<Feed, FeedAdapter.FeedViewHolder>(Feed.DIFF) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)
             = FeedViewHolder(ItemFeedBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -22,13 +23,26 @@ class FeedAdapter(private val dateParserUtil: DateParserUtil) : PagedListAdapter
 
     fun submitItems(items : PagedList<Feed>) {
         this.submitList(items)
+
     }
 
     inner class FeedViewHolder(private val binding : ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener { itemClick(getItem(layoutPosition)) }
+        }
+
         fun bind(item : Feed?) {
-            item ?: return
-            binding.created.text = dateParserUtil.parseToYMDHM(item.created)
-            binding.item = item
+            if(item == null) {
+                binding.created.text = ""
+                binding.content.text = ""
+                binding.likeCount.text = "Loading ..."
+            }else {
+                binding.likeCount.text = "${item.likeCount} likes"
+                binding.created.text = dateParserUtil.parseToYMDHM(item.created)
+                binding.item = item
+
+            }
             binding.executePendingBindings()
         }
     }

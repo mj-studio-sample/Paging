@@ -5,7 +5,6 @@ import happy.mjstudio.paging.data.api.FeedAPI
 import happy.mjstudio.paging.data.database.dao.FeedDao
 import happy.mjstudio.paging.domain.entity.Feed
 import happy.mjstudio.paging.domain.repository.FeedRepository
-import java.util.*
 import javax.inject.Inject
 
 /**
@@ -27,8 +26,12 @@ class FeedRepositoryImpl @Inject constructor(
         return dao.updateFeed(*feed)
     }
 
-    override suspend fun listFeed(limit: Int): List<Feed> {
-        return dao.listFeed(limit)
+    override suspend fun listFeed(limit: Int, offset : Int): List<Feed> {
+        return dao.listFeed(limit,offset)
+    }
+
+    override suspend fun addLike(id: Int): Int {
+        return dao.addLike(id)
     }
 
     override fun listFeedDataSourceFactory(): DataSource.Factory<Int, Feed> {

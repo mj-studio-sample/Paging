@@ -45,7 +45,9 @@ android {
         jvmTarget = '1.8'
     }
 
-
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
 
 }
 

@@ -12,19 +12,23 @@
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
+        android:fitsSystemWindows="false"
         app:layoutDescription="@xml/motion_scene_main"
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:background="#000"
-            app:layout_constraintTop_toTopOf="parent"
+        <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/header"
+            android:src="@drawable/header"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="match_parent"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
+            android:clipToPadding="false"
+            android:paddingBottom="60dp"
             app:adapter_items_Feed="@{vm.feeds}"
             android:id="@+id/recyclerView"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

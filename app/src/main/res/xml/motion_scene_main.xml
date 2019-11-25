@@ -7,7 +7,8 @@
         app:constraintSetEnd="@id/end">
         <OnSwipe
             app:dragDirection="dragUp"
-            app:onTouchUp="autoComplete"
+            app:dragScale="0.2"
+            app:onTouchUp="stop"
             app:touchAnchorId="@id/header"/>
 
     </Transition>
@@ -15,11 +16,17 @@
     <ConstraintSet
         android:id="@+id/start">
 
+
         <Constraint
-            android:layout_width="match_parent"
+            android:id="@id/header"
             android:layout_height="200dp"
+            android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@id/header"/>
+            >
+            <CustomAttribute
+                app:attributeName="saturation"
+                app:customFloatValue="2" />
+        </Constraint>
 
     </ConstraintSet>
 
@@ -28,10 +35,15 @@
         android:id="@+id/end">
 
         <Constraint
-            android:layout_width="match_parent"
+            android:id="@id/header"
             android:layout_height="50dp"
+            android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@id/header"/>
+            >
+            <CustomAttribute
+                app:attributeName="saturation"
+                app:customFloatValue="0"/>
+        </Constraint>
 
     </ConstraintSet>
 

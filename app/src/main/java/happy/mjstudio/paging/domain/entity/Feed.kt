@@ -21,7 +21,8 @@ data class Feed(
     val title : String,
     val content : String,
     @ForeignKey(entity = Reply::class,parentColumns = ["id"],childColumns = ["id"])
-    val replies : List<Int>
+    val replies : List<Int>,
+    val likeCount : Int = 0
 ) : Parcelable {
     companion object {
         val DIFF = object : DiffUtil.ItemCallback<Feed>() {

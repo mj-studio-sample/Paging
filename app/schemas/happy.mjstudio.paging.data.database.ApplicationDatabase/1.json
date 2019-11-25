@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3a01871d00f81e566a141ff7adad61c7",
+    "identityHash": "8a91b5097ff75f52f56bdf6fe6150696",
     "entities": [
       {
         "tableName": "Feed",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `replies` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created` INTEGER NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `replies` TEXT NOT NULL, `likeCount` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -36,6 +36,12 @@
             "fieldPath": "replies",
             "columnName": "replies",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "likeCount",
+            "columnName": "likeCount",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -78,7 +84,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3a01871d00f81e566a141ff7adad61c7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8a91b5097ff75f52f56bdf6fe6150696')"
     ]
   }
 }
