@@ -23,7 +23,6 @@ class FeedAdapter(private val dateParserUtil: DateParserUtil, private val itemCl
 
     fun submitItems(items : PagedList<Feed>) {
         this.submitList(items)
-
     }
 
     inner class FeedViewHolder(private val binding : ItemFeedBinding) : RecyclerView.ViewHolder(binding.root) {

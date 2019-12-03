@@ -11,6 +11,7 @@ import happy.mjstudio.paging.core.observeOnce
 import happy.mjstudio.paging.databinding.ActivityMainBinding
 import javax.inject.Inject
 
+
 class MainActivity : DaggerAppCompatActivity(), HasDefaultViewModelProviderFactory {
 
     companion object {
@@ -24,6 +25,7 @@ class MainActivity : DaggerAppCompatActivity(), HasDefaultViewModelProviderFacto
 
     @Inject
     lateinit var dateParserUtil: DateParserUtil
+
 
     override fun getDefaultViewModelProviderFactory(): ViewModelProvider.Factory {
         return viewModelFactory
@@ -58,7 +60,7 @@ class MainActivity : DaggerAppCompatActivity(), HasDefaultViewModelProviderFacto
     private fun observeViewModel() {
         mViewModel.apply {
             feedLikeResult.observeOnce(this@MainActivity) {
-//                (mBinding.recyclerView.adapter as? FeedAdapter)?.currentList?.dataSource?.invalidate()
+                (mBinding.recyclerView.adapter as? FeedAdapter)?.currentList?.dataSource?.invalidate()
             }
         }
     }

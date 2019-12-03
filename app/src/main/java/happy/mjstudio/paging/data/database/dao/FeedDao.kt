@@ -23,8 +23,8 @@ interface FeedDao {
     @Update
     suspend fun updateFeed(vararg feed : Feed ) : Int
 
-    @Query("SELECT * FROM Feed ORDER BY Created DESC LIMIT :limit OFFSET :offset")
-    suspend fun listFeed(limit : Int, offset : Int = 0) : List<Feed>
+    @Query("SELECT * FROM Feed WHERE created < :underTime ORDER BY Created DESC LIMIT 10")
+    suspend fun listFeed(underTime : Long) : List<Feed>
 
     @Query("SELECT * FROM Feed ORDER BY Created DESC")
     fun listFeedDataSourceFactory() : DataSource.Factory<Int,Feed>

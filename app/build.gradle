@@ -24,6 +24,8 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -34,7 +36,7 @@ android {
     }
 
     dataBinding.enabled = true
-    viewBinding.enabled = false
+//    viewBinding.enabled = false
 
     compileOptions {
         sourceCompatibility = 1.8
@@ -48,6 +50,8 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+
+
 
 }
 
@@ -63,7 +67,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.google.android.material:material:1.2.0-alpha01'
+    implementation 'com.google.android.material:material:1.2.0-alpha02'
 
 
     //Coroutine
@@ -89,13 +93,16 @@ dependencies {
     testImplementation "androidx.room:room-testing:2.2.2"
 
     //Dagger
-    implementation "com.google.dagger:dagger:2.15"
-    implementation 'com.google.dagger:dagger-android-support:2.15'
-    kapt "com.google.dagger:dagger-compiler:2.15"
-    kapt 'com.google.dagger:dagger-android-processor:2.15'
+    implementation "com.google.dagger:dagger:2.24"
+    implementation 'com.google.dagger:dagger-android-support:2.24'
+    kapt "com.google.dagger:dagger-compiler:2.24"
+    kapt 'com.google.dagger:dagger-android-processor:2.24'
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+
+    //Timber
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }

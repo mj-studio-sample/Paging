@@ -10,7 +10,7 @@ interface FeedRepository {
     suspend fun insertFeed(vararg feed : Feed)
     suspend fun deleteFeed(vararg feed : Feed) : Int
     suspend fun updateFeed(vararg feed : Feed) : Int
-    suspend fun listFeed(limit : Int = 10,offset : Int = 0) : List<Feed>
+    suspend fun listFeed(underTime : Long) : List<Feed>
     suspend fun addLike(id : Int) : Int
     fun listFeedDataSourceFactory() : DataSource.Factory<Int,Feed>
 }

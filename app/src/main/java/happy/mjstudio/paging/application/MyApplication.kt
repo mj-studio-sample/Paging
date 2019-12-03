@@ -7,6 +7,7 @@ import happy.mjstudio.paging.domain.entity.Feed
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 import java.util.concurrent.CancellationException
 
@@ -16,7 +17,6 @@ import java.util.concurrent.CancellationException
 class MyApplication : DaggerApplication() {
 
     companion object {
-
 
         lateinit var applicationComponent : ApplicationComponent
         private var createDatasJob : Job? = null
@@ -34,6 +34,12 @@ class MyApplication : DaggerApplication() {
             }
 
         }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        Timber.plant(Timber.DebugTree())
     }
 
     override fun applicationInjector() = DaggerApplicationComponent.builder().bindApp(this).build().also { applicationComponent = it }

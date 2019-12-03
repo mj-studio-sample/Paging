@@ -11,8 +11,8 @@ import javax.inject.Inject
  * Created by mj on 25, November, 2019
  */
 class FeedRepositoryImpl @Inject constructor(
-    private val dao : FeedDao,
-    private val api : FeedAPI
+    private val dao: FeedDao,
+    private val api: FeedAPI
 ) : FeedRepository {
     override suspend fun insertFeed(vararg feed: Feed) {
         return dao.insertFeed(*feed)
@@ -26,8 +26,8 @@ class FeedRepositoryImpl @Inject constructor(
         return dao.updateFeed(*feed)
     }
 
-    override suspend fun listFeed(limit: Int, offset : Int): List<Feed> {
-        return dao.listFeed(limit,offset)
+    override suspend fun listFeed(underTime: Long): List<Feed> {
+        return dao.listFeed(underTime)
     }
 
     override suspend fun addLike(id: Int): Int {
